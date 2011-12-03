@@ -1,0 +1,18 @@
+TODO for BiwaScheme Blackboard
+==============================
+
+High priority (release blocker)
+-------------------------------
+
+- can write code online
+
+
+Middle priority
+---------------
+
+-- private beta (12/19-?)
+
+Maybe
+-----
+
+
