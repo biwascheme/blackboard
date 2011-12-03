@@ -1,2 +1,6 @@
 h1 Users#show
 p Find me in app/views/users/show.html.slim
+
+- if @me
+  ' It's you!
+  = link_to 'edit', edit_user_registration_path
