@@ -21,7 +21,9 @@ html
   
     .container
 
-      p.notice= notice
-      p.alert= alert
+      - if notice
+        .alert-message.block-message.success = notice
+      - if alert
+        .alert-message.block-message.error = alert
 
       == yield
