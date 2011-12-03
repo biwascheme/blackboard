@@ -12,6 +12,7 @@ end
 # View
 
 gem 'slim-rails'
+gem 'twitter-bootstrap-rails'
 
 # Controller
 
