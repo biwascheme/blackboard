@@ -6,21 +6,22 @@ html
     = javascript_include_tag "application"
     = csrf_meta_tags
   body
-    .header
-      - if signed_in?
-        ' Hello,
-        = link_to current_user.login, user_path(current_user)
-        ' 
-        = link_to 'Sign out', destroy_user_session_path, :method => :delete
-      - else
-        = link_to 'Sign in', new_user_session_path
-        '  or
-        = link_to 'Sign up', new_user_registration_path
+    .topbar
+      .topbar-inner
+        .container
+          a.brand href="/" BiwaScheme Blackboard
+          ul.secondary-nav
+            li 
+            - if signed_in?
+              li = link_to current_user.login, user_path(current_user)
+              li = link_to 'Sign out', destroy_user_session_path, :method => :delete
+            - else
+              li = link_to 'Sign up', new_user_registration_path
+              li = link_to 'Sign in', new_user_session_path
+  
+    .container
 
+      p.notice= notice
+      p.alert= alert
 
-    h1 BiwaScheme Blackboard
-    
-    p.notice= notice
-    p.alert= alert
-
-    == yield
+      == yield
