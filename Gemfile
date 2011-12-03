@@ -13,6 +13,10 @@ end
 
 gem 'slim-rails'
 
+# Controller
+
+gem 'devise'
+
 # Assets
 
 # Gems used only for assets and not required
