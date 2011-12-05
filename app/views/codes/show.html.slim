@@ -1,10 +1,16 @@
-p
-  b Title:
-  = @code.title
-p
-  b Body:
-  = @code.body
+h1= @code.title
 
-= link_to 'Edit', edit_code_path(@code)
-'|
-= link_to 'Back', codes_path
+.author
+  ' by
+  = render @code.user
+
+- if @code.user == current_user
+  .edit= link_to '[Edit]', edit_code_path(@code)
+    
+.board
+  .left
+    = @code.body
+  .right
+
+.back
+  = link_to 'Back', codes_path
