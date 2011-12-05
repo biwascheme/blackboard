@@ -1,4 +1,6 @@
 class CodesController < ApplicationController
+  before_filter :authenticate_user!, only: [:create, :update]
+
   # GET /codes
   # GET /codes.json
   def index
@@ -35,12 +37,14 @@ class CodesController < ApplicationController
   # GET /codes/1/edit
   def edit
     @code = Code.find(params[:id])
+    raise unless @code.user == current_user
   end
 
   # POST /codes
   # POST /codes.json
   def create
     @code = Code.new(params[:code])
+    @code.user = current_user
 
     respond_to do |format|
       if @code.save
@@ -57,6 +61,7 @@ class CodesController < ApplicationController
   # PUT /codes/1.json
   def update
     @code = Code.find(params[:id])
+    raise unless @code.user == current_user
 
     respond_to do |format|
       if @code.update_attributes(params[:code])
