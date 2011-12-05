@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  b Title:
+  = @code.title
+p
+  b Body:
+  = @code.body
+
+= link_to 'Edit', edit_code_path(@code)
+'|
+= link_to 'Back', codes_path

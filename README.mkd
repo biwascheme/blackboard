@@ -2,3 +2,14 @@ BiwaScheme Blackboard
 =====================
 
 http://blackboard.biwascheme.org
+
+
+Models
+------
+
+* User (has_many codes)
+
+* Code (belongs_to user)
+  - text :scm 
+  - 
+

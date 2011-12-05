@@ -4,15 +4,44 @@ TODO for BiwaScheme Blackboard
 High priority (release blocker)
 -------------------------------
 
-- can write code online
+- iframe
+
+- fork (copy & edit)
+
+- licence (MIT)
+
+- version & library
+  - バージョンを選べること
+  -- jsライブラリを追加できること
+
+  - 検索が実装しやすいこと
+  - 間違って動かなくさせられないこと
+
+  案
+    * HTMLというタブ
+    * 個別の入力欄
+      
 
 
 Middle priority
 ---------------
+
+-- fav?
+
+-- tweet/like button
+
+-- private
+
+-- choose version of biwascheme.js
 
 -- private beta (12/19-?)
 
 Maybe
 -----
 
+--- js libraries
+
+--- mail notification
+
+--- code search by function name
 

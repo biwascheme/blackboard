@@ -1,4 +1,6 @@
 Blackboard::Application.routes.draw do
+  resources :codes
+
   devise_for :users
   resources :users, only: :show
 
