@@ -6,10 +6,11 @@ h1= @code.title
 
 - if @code.user == current_user
   .edit= link_to '[Edit]', edit_code_path(@code)
-    
+
 .board
   .left
-    = @code.body
+    #editor
+      = @code.body
   .right
 
 .back

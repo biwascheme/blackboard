@@ -7,4 +7,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//
+//= require ace
+//= require theme-cobalt.js
+//= require mode-clojure.js
+//
 //= require_tree .
