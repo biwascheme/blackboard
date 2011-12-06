@@ -85,4 +85,10 @@ class CodesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def stage
+    @code = Code.find(params[:code_id])
+
+    render "stage", layout: nil
+  end
 end

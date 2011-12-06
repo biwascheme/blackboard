@@ -1,5 +1,8 @@
 Blackboard::Application.routes.draw do
-  resources :codes
+  resources :codes do
+    get 'stage'
+    post 'stage'
+  end
 
   devise_for :users
   resources :users, only: :show

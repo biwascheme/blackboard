@@ -12,6 +12,7 @@ h1= @code.title
     #editor
       = @code.body
   .right
+    iframe#stage src=code_stage_path(@code)
 
 .back
   = link_to 'Back', codes_path

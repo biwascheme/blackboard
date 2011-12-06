@@ -10,7 +10,10 @@ $unit: 460px
 .left
   width: $unit
   height: $unit
-  border: 1px solid black
+  border:
+    width: 1px 0px 1px 1px
+    style: solid 
+    color: black
   float: left
   position: relative
 
@@ -22,6 +25,12 @@ $unit: 460px
 .right
   width: $unit
   height: $unit
-  border: 1px solid black
   float: left
   position: relative
+
+  #stage
+    width: $unit
+    height: $unit
+    border: 1px solid black
+
+
