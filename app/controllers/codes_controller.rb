@@ -88,6 +88,13 @@ class CodesController < ApplicationController
 
   def stage
     @code = Code.find(params[:code_id])
+    @program = @code.body
+
+    render "stage", layout: nil
+  end
+
+  def tmp_stage
+    @program = 
 
     render "stage", layout: nil
   end

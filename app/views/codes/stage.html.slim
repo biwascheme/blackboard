@@ -3,7 +3,9 @@ html
   head
     title BiwaScheme Blackboard
   body
+    input type="hidden" id="program"
+
     #bs-console
 
-    script src="/libs/biwascheme.js"
-      == @code.body
+    script src="/libs/biwascheme.js" type="text/javascript"
+      == @program

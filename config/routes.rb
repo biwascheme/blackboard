@@ -1,7 +1,7 @@
 Blackboard::Application.routes.draw do
+  match 'codes/tmp_stage' => 'codes#tmp_stage'
   resources :codes do
     get 'stage'
-    post 'stage'
   end
 
   devise_for :users

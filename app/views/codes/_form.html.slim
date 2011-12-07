@@ -9,8 +9,18 @@
   .field
     = f.label :title
     = f.text_field :title
-  .field
-    = f.label :body
-    = f.text_area :body
+
+  = button_tag 'eval', type: 'button', id: 'eval', class: 'btn'
+
+  .board
+    .left
+      #editor
+        = @code.body
+    .right
+      iframe#stage name="stage" src=codes_tmp_stage_path(@code)
+
+//  .field
+//    = f.label :body
+//    = f.text_area :body
   .actions
     = f.submit 'Save'
