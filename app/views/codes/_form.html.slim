@@ -1,4 +1,4 @@
-= form_for @code do |f|
+= form_for @code, html: {class: 'form-stacked'} do |f|
   -if @code.errors.any?
     #error_explanation
       h2 = "#{pluralize(@code.errors.count, "error")} prohibited this code from being saved:"
@@ -6,21 +6,15 @@
         - @code.errors.full_messages.each do |msg|
           li= msg
 
-  .field
+  .clearfix
     = f.label :title
-    = f.text_field :title
+    .input
+      = f.text_field :title, class: 'xlarge'
 
-  = button_tag 'eval', type: 'button', id: 'eval', class: 'btn'
+  .row.clearfix
+    .span1.offset8
+      = button_tag 'eval', type: 'button', id: 'eval', class: 'btn'
+    .span1.offset5
+      = f.submit 'save', class: 'btn'
 
-  .board
-    .left
-      #editor
-        = @code.body
-    .right
-      iframe#stage name="stage" src=codes_tmp_stage_path(@code)
-
-//  .field
-//    = f.label :body
-//    = f.text_area :body
-  .actions
-    = f.submit 'Save'
+  == render "board"

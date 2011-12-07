@@ -1,0 +1,7 @@
+.board.clearfix
+  .left
+    #editor
+      = @code.body
+  .right
+    iframe#stage name="stage" src=codes_tmp_stage_path(@code)
+
