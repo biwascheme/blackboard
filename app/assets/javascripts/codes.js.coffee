@@ -2,10 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
+  # Editor by Ace
   editor = null
-
-  escape_program = (program) ->
-
 
   # Setup editor if #editor exists
   if $("#editor").length != 0
@@ -17,16 +15,16 @@ $ ->
   # On #eval clicked
   if $("#eval").length != 0
     $("#eval").click ->
+      iframe_obj = window["stage"]
       program = editor.getSession().getValue()
-      $(window["stage"].window["program"]).val(program)
+      $(iframe_obj.window["program"]).val(program)
 
-      # Hack needed for IE?
+      # Hack needed for old IE?
       # http://www.thismuchiknow.co.uk/?p=25
-      #   if (!iframe.eval && iframe.execScript) {
-      #       iframe.execScript("null");
-      #         }
+      if (!iframe_obj.eval && iframe_obj.execScript)
+        iframe_obj.execScript("null")
 
-      window["stage"].eval "
+      iframe_obj.eval '''
         (function(){
           var on_error = function(e){
             console.error(e);
@@ -36,6 +34,6 @@ $ ->
           var intp = new BiwaScheme.Interpreter(on_error);
           intp.evaluate($('#program').val());
         })();
-      "
+        '''
 
 
