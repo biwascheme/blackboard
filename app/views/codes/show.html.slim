@@ -1,4 +1,5 @@
-h1= @code.title
+h1 
+  = link_to @code.title, code_path(@code)
 
 .author
   ' by
@@ -9,7 +10,7 @@ h1= @code.title
 
 .board
   .left
-    #editor
+    #editor.read-only
       = @code.body
   .right
     iframe#stage src=code_stage_path(@code)

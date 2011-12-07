@@ -12,6 +12,9 @@ $ ->
     clojureMode = require("ace/mode/clojure").Mode
     editor.getSession().setMode(new clojureMode())
 
+    if $("#editor").hasClass("read-only")
+      editor.setReadOnly(true)
+
   # On #eval clicked
   if $("#eval").length != 0
     $("#eval").click ->
