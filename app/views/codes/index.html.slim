@@ -18,6 +18,8 @@ table
       td= link_to 'Edit', edit_code_path(code)
       td= link_to 'Destroy', code, :confirm => 'Are you sure?', :method => :delete
 
+= paginate @codes
+
 br
 
 = link_to 'New Code', new_code_path
