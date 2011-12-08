@@ -27,6 +27,7 @@ class CodesController < ApplicationController
   # GET /codes/new.json
   def new
     @code = Code.new
+    @code.body = '(print "Hello, world!")'
 
     respond_to do |format|
       format.html # new.html.erb
