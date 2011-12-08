@@ -20,8 +20,13 @@
 
   // Buttons
   .row.clearfix
-    .span1.offset8
-      = button_tag 'run', type: 'button', id: 'eval', class: 'btn'
+    // Button run
+    .span1.offset7
+      = button_tag 'run', type: 'button', id: 'run', class: 'btn'
+    // Button stop
+    .span1
+      = button_tag 'stop', type: 'button', id: 'stop', class: 'btn'
+    // Button save
     .span1.offset5
       = f.submit 'save', id: 'save', class: 'btn'
 

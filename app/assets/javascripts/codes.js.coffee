@@ -13,11 +13,11 @@ $ ->
   # Utilities
   #
 
-  # Return current content of the editor.
+  # Returns current content of the editor.
   get_program = ->
     editor.getSession().getValue()
 
-  # Evalate javascript in iframe.
+  # Evalates javascript in iframe.
   eval_in_iframe = (iframe_obj, program) ->
     # Hack needed for old IE?
     # http://www.thismuchiknow.co.uk/?p=25
@@ -40,7 +40,7 @@ $ ->
   # Event handlers
   #
 
-  onEvalClicked = ->
+  $('#run').click ->
     iframe_obj = window["stage"]
     $(iframe_obj.window["program"]).val(get_program())
 
@@ -56,7 +56,7 @@ $ ->
       })();
       '''
 
-  onSaveCliced = ->
+  $('#save').click ->
     userNotSignedIn = ->
       $("#modal-please-sign-in").modal(keyboard: true)
 
@@ -82,7 +82,3 @@ $ ->
 
   if $("#editor").length != 0
     setup_editor("editor", $("#editor").hasClass("read-only"))
-
-  $("#eval").click(onEvalClicked)
-  $("#save").click(onSaveCliced)
-
