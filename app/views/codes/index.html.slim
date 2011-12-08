@@ -1,25 +1,22 @@
-h1 Listing codes
+= paginate @codes
 
 table
   tr
     th Title
     th Body
     th Author
-    th
-    th
-    th
 
   - @codes.each do |code|
     tr
-      td= code.title
-      td= code.body
+      td= link_to code.title, code_path(code)
+      td= code.body.truncate(60)
       td= link_to code.user, user_path(code.user)
-      td= link_to 'Show', code
-      td= link_to 'Edit', edit_code_path(code)
-      td= link_to 'Destroy', code, :confirm => 'Are you sure?', :method => :delete
 
 = paginate @codes
 
 br
 
-= link_to 'New Code', new_code_path
+p
+  = link_to 'Create new code', new_code_path
+p
+  = link_to 'Back to top', root_path
