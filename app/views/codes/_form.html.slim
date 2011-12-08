@@ -1,4 +1,6 @@
-= form_for @code, html: {class: 'form-stacked'} do |f|
+// Form
+= form_for @code, html: {id: 'editor-form', class: 'form-stacked'} do |f|
+  // Errors
   -if @code.errors.any?
     #error_explanation
       h2 = "#{pluralize(@code.errors.count, "error")} prohibited this code from being saved:"
@@ -6,19 +8,29 @@
         - @code.errors.full_messages.each do |msg|
           li= msg
 
+  // code.title
   .clearfix
     = f.label :title
     .input
       = f.text_field :title, class: 'xlarge'
 
+  // code.body
+  // set by onSaveCliced (see codes.js.coffee)
+  = f.hidden_field :body, id: 'code-body'
+
+  // Buttons
   .row.clearfix
     .span1.offset8
       = button_tag 'run', type: 'button', id: 'eval', class: 'btn'
     .span1.offset5
       = f.submit 'save', id: 'save', class: 'btn'
 
+  // Board (editor and screen)
+  // see _board.html.slim
   == render "board"
 
+
+// Modal
 #modal-please-sign-in.modal.hide
   .modal-header
     h3 Login required

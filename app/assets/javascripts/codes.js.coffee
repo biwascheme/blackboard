@@ -13,6 +13,10 @@ $ ->
   # Utilities
   #
 
+  # Return current content of the editor.
+  get_program = ->
+    editor.getSession().getValue()
+
   # Evalate javascript in iframe.
   eval_in_iframe = (iframe_obj, program) ->
     # Hack needed for old IE?
@@ -38,8 +42,7 @@ $ ->
 
   onEvalClicked = ->
     iframe_obj = window["stage"]
-    program = editor.getSession().getValue()
-    $(iframe_obj.window["program"]).val(program)
+    $(iframe_obj.window["program"]).val(get_program())
 
     eval_in_iframe iframe_obj, '''
       (function(){
@@ -52,23 +55,26 @@ $ ->
         intp.evaluate($('#program').val());
       })();
       '''
-  onSaveCliced = ->
-    userSignedIn = ->
-      alert("hi")
 
+  onSaveCliced = ->
     userNotSignedIn = ->
       $("#modal-please-sign-in").modal(keyboard: true)
+
+    userSignedIn = ->
+      $("#code-body").val(get_program())
+      $("#editor-form").submit()
     
+    $("#close-please-sign-in").click ->
+      $("#modal-please-sign-in").modal('hide')
+
     $.ajax(
       url: "/users/signed_in"
       success: (x) ->
         if x then userSignedIn() else userNotSignedIn()
       dataType: "json"
     )
-    false
 
-  $("#close-please-sign-in").click ->
-    $("#modal-please-sign-in").modal('hide')
+    false
 
   #
   # Main
