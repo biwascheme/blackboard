@@ -16,6 +16,7 @@ end
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
 gem 'ace-rails-ap'
+gem 'kaminari'
 
 # Controller
 
