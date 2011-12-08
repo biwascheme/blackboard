@@ -5,6 +5,7 @@ Blackboard::Application.routes.draw do
   end
 
   devise_for :users
+  get 'users/signed_in' => 'users#signed_in?'
   resources :users, only: :show
 
   root :to => "top#index"

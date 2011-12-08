@@ -15,6 +15,21 @@
     .span1.offset8
       = button_tag 'run', type: 'button', id: 'eval', class: 'btn'
     .span1.offset5
-      = f.submit 'save', class: 'btn'
+      = f.submit 'save', id: 'save', class: 'btn'
 
   == render "board"
+
+#modal-please-sign-in.modal.hide
+  .modal-header
+    h3 Login required
+
+  .modal-body
+    ' Please
+    = link_to 'sign in', new_user_session_path, target: '_blank'
+    '  or
+    = link_to 'sign up', new_user_registration_path, target: '_blank'
+    '  first.
+    
+  .modal-footer
+    a#close-please-sign-in.btn
+      | close

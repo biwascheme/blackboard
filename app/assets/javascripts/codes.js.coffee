@@ -35,6 +35,7 @@ $ ->
   #
   # Event handlers
   #
+
   onEvalClicked = ->
     iframe_obj = window["stage"]
     program = editor.getSession().getValue()
@@ -51,6 +52,23 @@ $ ->
         intp.evaluate($('#program').val());
       })();
       '''
+  onSaveCliced = ->
+    userSignedIn = ->
+      alert("hi")
+
+    userNotSignedIn = ->
+      $("#modal-please-sign-in").modal(keyboard: true)
+    
+    $.ajax(
+      url: "/users/signed_in"
+      success: (x) ->
+        if x then userSignedIn() else userNotSignedIn()
+      dataType: "json"
+    )
+    false
+
+  $("#close-please-sign-in").click ->
+    $("#modal-please-sign-in").modal('hide')
 
   #
   # Main
@@ -59,5 +77,6 @@ $ ->
   if $("#editor").length != 0
     setup_editor("editor", $("#editor").hasClass("read-only"))
 
-  if $("#eval").length != 0
-    $("#eval").click(onEvalClicked)
+  $("#eval").click(onEvalClicked)
+  $("#save").click(onSaveCliced)
+
