@@ -1,6 +1,17 @@
-h1 Users#show
-p Find me in app/views/users/show.html.slim
+h1 
+  = @user.login
 
-- if @me
-  ' It's you!
-  = link_to 'edit', edit_user_registration_path
+- if @owned
+  .alert-message.block-message.info
+    ' It's you!
+    .alert-actions
+      = link_to 'Edit account', edit_user_registration_path, class: 'btn small'
+
+table
+  - @codes.each do |code|
+    tr
+      td= link_to code.title, code_path(code)
+      td= code.body.truncate(60)
+      td= link_to code.user, user_path(code.user)
+
+= paginate @codes

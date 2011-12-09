@@ -4,7 +4,6 @@ class Code < ActiveRecord::Base
   validates_presence_of :title, :body, :user
 
   # View
-  #default_scope :order => 'created_at DESC'
   paginates_per 50
 
 end

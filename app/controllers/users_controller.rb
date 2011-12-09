@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   def show
-    @me = (current_user && (params[:id].to_i == current_user.id))
+    @user = User.find(params[:id])
+    @codes = @user.codes.order('updated_at DESC').
+                         page(params[:page]).per(10)
+
+    @owned = (current_user && (params[:id].to_i == current_user.id))
   end
 
   def signed_in?
