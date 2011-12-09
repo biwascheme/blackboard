@@ -4,6 +4,6 @@ class UsersController < ApplicationController
   end
 
   def signed_in?
-    render json: !!current_user
+    render json: (user_signed_in?)
   end
 end
