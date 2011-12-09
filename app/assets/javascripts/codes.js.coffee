@@ -1,6 +1,7 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+#
+# JavaScript for editing Scheme codes
+#
+
 $ ->
   #
   # Variables
@@ -8,6 +9,10 @@ $ ->
 
   # Editor by Ace
   editor = null
+
+  iframe_obj = window["stage"]
+
+  initialHTML = null
 
   #
   # Utilities
@@ -41,7 +46,10 @@ $ ->
   #
 
   $('#run').click ->
-    iframe_obj = window["stage"]
+    initialHTML ?= $("#stage").contents().find('html').html()
+    console.log(initialHTML)
+    # <head><title>BiwaScheme Blackboard</title></head><body><input id="program" type="hidden"><div id="bs-console"></div><script src="/libs/biwascheme.js" type="text/javascript"></script></body>
+
     $(iframe_obj.window["program"]).val(get_program())
 
     eval_in_iframe iframe_obj, '''
@@ -55,6 +63,9 @@ $ ->
         intp.evaluate($('#program').val());
       })();
       '''
+
+  $('#stop').click ->
+    iframe_obj.location.reload()
 
   $('#save').click ->
     userNotSignedIn = ->
