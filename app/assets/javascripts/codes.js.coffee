@@ -12,8 +12,6 @@ $ ->
 
   iframe_obj = window["stage"]
 
-  initialHTML = null
-
   #
   # Utilities
   #
@@ -46,10 +44,6 @@ $ ->
   #
 
   $('#run').click ->
-    initialHTML ?= $("#stage").contents().find('html').html()
-    console.log(initialHTML)
-    # <head><title>BiwaScheme Blackboard</title></head><body><input id="program" type="hidden"><div id="bs-console"></div><script src="/libs/biwascheme.js" type="text/javascript"></script></body>
-
     $(iframe_obj.window["program"]).val(get_program())
 
     eval_in_iframe iframe_obj, '''
