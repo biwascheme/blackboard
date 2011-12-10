@@ -10,6 +10,11 @@ $ ->
   # Editor by Ace
   editor = null
 
+  # A String represents HTML of initial content of iframe
+  emptyIframe = null
+
+  # iframe object 
+  # Note: this is not the iframe tag, which is $("#stage")[0]
   iframe_obj = window["stage"]
 
   #
@@ -44,8 +49,14 @@ $ ->
   #
 
   $('#run').click ->
-    $(iframe_obj.window["program"]).val(get_program())
+    # Reset iframe content
+    if emptyIframe
+      $("#stage").contents().find('body').html(emptyIframe)
+    else
+      emptyIframe = $("#stage").contents().find('body').html()
 
+    # Evaluate Scheme program
+    $(iframe_obj.window["program"]).val(get_program())
     eval_in_iframe iframe_obj, '''
       (function(){
         var on_error = function(e){
@@ -59,6 +70,7 @@ $ ->
       '''
 
   $('#stop').click ->
+    # Reload iframe to stop every setInterval() timers
     iframe_obj.location.reload()
 
   $('#save').click ->
