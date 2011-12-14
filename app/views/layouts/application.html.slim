@@ -1,7 +1,11 @@
 doctype html
 html
   head
-    title BiwaScheme Blackboard
+    title
+      - if content_for?(:title)
+        == yield :title
+      - else
+        | BiwaScheme Blackboard
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
