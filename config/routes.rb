@@ -1,9 +1,8 @@
 Blackboard::Application.routes.draw do
-  match 'codes/tmp_stage' => 'codes#tmp_stage'
-  put 'codes/new' => 'codes#new'
-  resources :codes, except: [:edit] do
-    get 'stage'
-  end
+  post 'codes/new'
+  put 'codes/new'
+  get 'codes/stage'
+  resources :codes, except: [:edit]
 
   devise_for :users
   get 'users/signed_in' => 'users#signed_in?'
