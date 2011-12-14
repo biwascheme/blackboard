@@ -16,6 +16,7 @@ class CodesController < ApplicationController
   # GET /codes/1.json
   def show
     @code = Code.find(params[:id])
+    @owned = (@code.user == current_user)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,7 +28,10 @@ class CodesController < ApplicationController
   # GET /codes/new.json
   def new
     @code = Code.new
-    @code.body = '(print "Hello, world!")'
+#    @code.title = params[:code].try(:[], :title) ||
+#                 Time.now.strftime("%Y-%m-%d")
+    @code.body = params[:code].try(:[], :body) ||
+                 '(print "Hello, world!")'
 
     respond_to do |format|
       format.html # new.html.erb

@@ -17,6 +17,8 @@ $ ->
   # Note: this is not the iframe tag, which is $("#stage")[0]
   iframe_obj = window["stage"]
 
+  isOwned = $("#owned").length != 0
+
   #
   # Utilities
   #
@@ -35,14 +37,17 @@ $ ->
     iframe_obj.eval(program)
 
   # Setup Ace text editor.
-  setup_editor = (name, isReadOnly) ->
+  setup_editor = (name) ->
     editor = ace.edit(name)
+    # Theme
     editor.setTheme("ace/theme/cobalt")
+    # Mode
     clojureMode = require("ace/mode/clojure").Mode
     editor.getSession().setMode(new clojureMode())
-
-    if isReadOnly
-      editor.setReadOnly(true)
+    # OnChange
+    editor.getSession().on 'change', ->
+      $('#save-as-new').fadeIn()
+      editor.getSession().on('change', ->{})
 
   #
   # Event handlers
@@ -69,33 +74,39 @@ $ ->
       })();
       '''
 
-  $('#stop').click ->
+  $('#reset').click ->
     # Reload iframe to stop every setInterval() timers
     iframe_obj.location.reload()
 
   $('#save').click ->
-    userNotSignedIn = ->
-      $("#modal-please-sign-in").modal(keyboard: true)
-
-    userSignedIn = ->
-      $("#code-body").val(get_program())
-      $("#editor-form").submit()
-    
-    $("#close-please-sign-in").click ->
-      $("#modal-please-sign-in").modal('hide')
-
     $.ajax(
       url: "/users/signed_in"
-      success: (x) ->
-        if x then userSignedIn() else userNotSignedIn()
       dataType: "json"
+      success: (signedIn) ->
+        if signedIn
+          if $("#save").val() == "Save"
+            # Save
+            $("#code-body").val(get_program())
+            $("#editor-form").submit()
+          else
+            # Save as new
+            $("#code-body").val(get_program())
+            $("#editor-form")[0].action = "/codes/new"
+            console.log(["form", $("#editor-form")])
+            $("#editor-form").submit()
+        else
+          $("#modal-please-sign-in").modal(keyboard: true)
     )
 
     false
+
+  # Modal for asking sign in
+  $("#close-please-sign-in").click ->
+    $("#modal-please-sign-in").modal('hide')
 
   #
   # Main
   #
 
   if $("#editor").length != 0
-    setup_editor("editor", $("#editor").hasClass("read-only"))
+    setup_editor("editor")

@@ -2,6 +2,16 @@
 // Board (editor and screen)
 //
 
+
+// Buttons
+.row.clearfix
+  // Button run
+  .span1.offset8
+    = button_tag 'Run', type: 'button', id: 'run', class: 'btn'
+  // Button stop
+  .span1.offset5
+    = button_tag 'Reset', type: 'button', id: 'reset', class: 'btn'
+
 .board.clearfix
   .left
     #editor

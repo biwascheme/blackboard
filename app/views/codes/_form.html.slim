@@ -4,18 +4,31 @@
 
 = form_for @code, html: {id: 'editor-form', class: 'form-stacked'} do |f|
   // Errors
-  -if @code.errors.any?
+  - if @code.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@code.errors.count, "error")} prohibited this code from being saved:"
+      h3 = "#{pluralize(@code.errors.count, "error")} prohibited this code from being saved:"
       ul
         - @code.errors.full_messages.each do |msg|
           li= msg
 
-  // code.title
-  .clearfix
-    = f.label :title
-    .input
-      = f.text_field :title, class: 'xlarge'
+  - if opts[:title]
+    // Title
+    h2 
+      = link_to @code.title, code_path(@code)
+
+  - if opts[:author]
+    p.author
+      ' by
+      = render @code.user
+
+  - if opts[:title_form]
+    // code.title
+    .clearfix
+      = f.label :title
+      .input
+        = f.text_field :title, class: 'xlarge'
+  - else
+    = f.hidden_field :title, id: 'code-title'
 
   // code.body
   // set by onSaveCliced (see codes.js.coffee)
@@ -24,19 +37,32 @@
   // Buttons
   .row.clearfix
     // Button run
-    .span1.offset7
-      = button_tag 'run', type: 'button', id: 'run', class: 'btn'
+    .span1.offset8
+      = button_tag 'Run', type: 'button', id: 'run', class: 'btn'
     // Button stop
-    .span1
-      = button_tag 'stop', type: 'button', id: 'stop', class: 'btn'
-    // Button save
     .span1.offset5
-      = f.submit 'save', id: 'save', class: 'btn'
+      = button_tag 'Reset', type: 'button', id: 'reset', class: 'btn'
 
-  // Board (editor and screen)
-  // see _board.html.slim
-  == render "board"
+  .board.clearfix
+    .left
+      #editor
+        = @code.body
+    .right
+      iframe#stage name="stage" src=codes_tmp_stage_path(@code)
 
+  // Button save
+  .row
+    .span1.offset6
+      - case opts[:save_as_new]
+      - when :show
+        #save-as-new
+          = submit_tag 'Save as new', id: 'save', class: 'btn primary large'
+      - when :hide
+        #save-as-new.hide
+          = submit_tag 'Save as new', id: 'save', class: 'btn primary large'
+      - else
+        // Value must be 'Save' (see codes.js.coffee)
+        = f.submit 'Save', id: 'save', class: 'btn primary large'
 
 // Modal
 #modal-please-sign-in.modal.hide

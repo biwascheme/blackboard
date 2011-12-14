@@ -6,4 +6,8 @@ class Code < ActiveRecord::Base
   # View
   paginates_per 50
 
+  # Returns randomly selected instance of Code.
+#  def self.sample
+#    Code.first(:offset => rand(Code.count))
+#  end
 end

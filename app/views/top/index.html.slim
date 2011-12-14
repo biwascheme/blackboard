@@ -1,4 +1,14 @@
-h1 Top#index
-p Find me in app/views/top/index.html.slim
+.alert-message.block-message.info
+  p
+    b BiwaScheme Blackboard
+    '  is a sandbox for
+    = link_to 'BiwaScheme', 'http://www.biwascheme.org/'
+    ' , a R6RS Scheme interpreter written in JavaScript.
+  p
+    | You can edit, run and save Scheme code in your browser.
 
-p= link_to codes_path, codes_path
+
+== render partial: 'codes/form', locals: {opts: {title: false,  \
+                                                 title_form: false, \
+                                                 author: false, \
+                                                 save_as_new: :show}}
