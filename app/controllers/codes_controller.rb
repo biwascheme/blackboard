@@ -39,12 +39,6 @@ class CodesController < ApplicationController
     end
   end
 
-  # GET /codes/1/edit
-  def edit
-    @code = Code.find(params[:id])
-    raise unless @code.user == current_user
-  end
-
   # POST /codes
   # POST /codes.json
   def create

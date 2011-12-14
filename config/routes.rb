@@ -1,7 +1,7 @@
 Blackboard::Application.routes.draw do
   match 'codes/tmp_stage' => 'codes#tmp_stage'
   put 'codes/new' => 'codes#new'
-  resources :codes do
+  resources :codes, except: [:edit] do
     get 'stage'
   end
 
