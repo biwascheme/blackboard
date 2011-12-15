@@ -54,6 +54,9 @@ $ ->
   #
 
   $('#run').click ->
+    # Enable reset button
+    $('#reset').removeClass("disabled")
+    
     # Reset iframe content
     if emptyIframe
       $("#stage").contents().find('body').html(emptyIframe)

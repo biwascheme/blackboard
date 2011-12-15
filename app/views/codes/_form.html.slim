@@ -36,12 +36,12 @@
 
   // Buttons
   .row.clearfix
-    // Button run
+    // Run button
     .span1.offset8
       = button_tag 'Run', type: 'button', id: 'run', class: 'btn'
-    // Button stop
+    // Reset button
     .span1.offset5
-      = button_tag 'Reset', type: 'button', id: 'reset', class: 'btn'
+      = button_tag 'Reset', type: 'button', id: 'reset', class: 'disabled btn'
 
   .board.clearfix
     .left
