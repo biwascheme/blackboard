@@ -4,12 +4,10 @@ gem 'rails', '3.1.3'
 
 # Model
 
-#gem 'acts-as-taggable-on'
-
 gem 'sqlite3'
-group :production do
-  gem 'pg'
-end
+group(:production){ gem 'pg' }
+gem 'ancestry'
+#gem 'acts-as-taggable-on'
 
 # View
 

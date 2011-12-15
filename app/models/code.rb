@@ -1,7 +1,12 @@
 class Code < ActiveRecord::Base
+  # Association
   belongs_to :user
 
+  # Validation
   validates_presence_of :title, :body, :user
+
+  # Plugin
+  has_ancestry
 
   # View
   paginates_per 50
