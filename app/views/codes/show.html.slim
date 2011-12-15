@@ -4,12 +4,10 @@
 
 - if @owned
   == render partial: 'form', locals: {opts: {title: true, \
-                                             title_form: true, \
                                              author: true, \
                                              save_as_new: false}}
 - else
   == render partial: 'form', locals: {opts: {title: true, \
-                                             title_form: false, \
                                              author: true, \
                                              save_as_new: :show}}
 

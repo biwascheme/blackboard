@@ -1,6 +1,13 @@
 //
 // Form for codes (title input and code editor)
 //
+// Options
+//   :title - Show title of @code (default: false)
+//   :author - Show name of @code.user (default: false)
+//   :save_as_new - Save button acts as 'save as new' (default: false)
+//     Especially, 
+//     :hide - Show save button only after code is changed  
+//     :show - Show save button from first (defualt)
 
 = form_for @code, html: {id: 'editor-form', class: 'form-stacked'} do |f|
   // Errors
@@ -21,14 +28,14 @@
       ' by
       = render @code.user
 
-  - if opts[:title_form]
+  - if opts[:save_as_new]
+    = f.hidden_field :title, id: 'code-title'
+  - else
     // code.title
     .clearfix
       = f.label :title
       .input
         = f.text_field :title, class: 'xlarge'
-  - else
-    = f.hidden_field :title, id: 'code-title'
 
   // code.body
   // set by onSaveCliced (see codes.js.coffee)
@@ -54,7 +61,7 @@
   .row
     .span1.offset6
       - case opts[:save_as_new]
-      - when :show
+      - when :show, true
         #save-as-new
           = submit_tag 'Save as new', id: 'save', class: 'btn primary large'
       - when :hide
