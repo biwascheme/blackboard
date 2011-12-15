@@ -7,8 +7,26 @@
   p
     | You can edit, run and save Scheme code in your browser.
 
+h2 Blackboard
 
 == render partial: 'codes/form', locals: {opts: {title: false,  \
                                                  save_as_new: :show}}
+
+h2 Recent codes
+
+table
+  tr
+    th Title
+    th Body
+    th Author
+
+  - @codes.each do |code|
+    tr
+      td= link_to code.title, code_path(code)
+      td= link_to code.body.truncate(60), code_path(code)
+      td= link_to code.user, user_path(code.user)
+
+p 
+  = link_to 'more...', codes_path
 
 == render 'shared/social_buttons'
