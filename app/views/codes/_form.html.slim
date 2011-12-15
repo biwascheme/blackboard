@@ -8,6 +8,7 @@
 //     Especially, 
 //     :hide - Show save button only after code is changed  
 //     :show - Show save button from first (defualt)
+//   :delete_button - Show delete button (default: false)
 
 = form_for @code, html: {id: 'editor-form', class: 'form-stacked'} do |f|
   // Errors
@@ -48,7 +49,7 @@
       = button_tag 'Run', type: 'button', id: 'run', class: 'btn'
     // Reset button
     .span1.offset5
-      = button_tag 'Reset', type: 'button', id: 'reset', class: 'disabled btn'
+      = button_tag 'Reset', type: 'button', id: 'reset', class: 'btn disabled'
 
   .board.clearfix
     .left
@@ -70,6 +71,13 @@
       - else
         // Value must be 'Save' (see codes.js.coffee)
         = f.submit 'Save', id: 'save', class: 'btn primary large'
+
+    - if opts[:delete_button]
+      .span3.offset5
+        //= button_tag 'Delete this code', type: 'button', id: 'delete', class: 'btn small danger'
+        = link_to 'Delete this code', @code, confirm: 'Are you sure?', method: :delete, class: 'btn small danger'
+
+
 
 // Modal
 #modal-please-sign-in.modal.hide

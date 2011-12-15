@@ -28,8 +28,7 @@ class CodesController < ApplicationController
   # GET /codes/new.json
   def new
     @code = Code.new
-#    @code.title = params[:code].try(:[], :title) ||
-#                 Time.now.strftime("%Y-%m-%d")
+    @code.title = Time.now.strftime("%Y-%m-%d")
     @code.body = params[:code].try(:[], :body) ||
                  '(print "Hello, world!")'
 
@@ -80,7 +79,7 @@ class CodesController < ApplicationController
     @code.destroy
 
     respond_to do |format|
-      format.html { redirect_to codes_url }
+      format.html { redirect_to codes_url, notice: 'Code was successfully deleted.' }
       format.json { head :ok }
     end
   end
