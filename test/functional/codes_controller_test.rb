@@ -2,6 +2,7 @@ require 'test_helper'
 
 class CodesControllerTest < ActionController::TestCase
   setup do
+    @user = users(:one)
     @code = codes(:one)
   end
 
@@ -17,6 +18,8 @@ class CodesControllerTest < ActionController::TestCase
   end
 
   test "should create code" do
+    sign_in @user
+
     assert_difference('Code.count') do
       post :create, code: @code.attributes
     end
@@ -29,12 +32,9 @@ class CodesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @code.to_param
-    assert_response :success
-  end
-
   test "should update code" do
+    sign_in @code.user
+
     put :update, id: @code.to_param, code: @code.attributes
     assert_redirected_to code_path(assigns(:code))
   end

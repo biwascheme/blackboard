@@ -30,7 +30,7 @@ table
     tr
       td= link_to code.title, code_path(code)
       td= link_to code.body.truncate(60), code_path(code)
-      td= link_to code.user, user_path(code.user)
+      td= render code.user
 
 p 
   = link_to 'more...', codes_path

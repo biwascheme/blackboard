@@ -3,7 +3,9 @@
 one:
   title: MyString
   body: MyText
+  user: one
 
 two:
   title: MyString
   body: MyText
+  user: two
