@@ -6,8 +6,7 @@
 //   :author - Show name of @code.user (default: false)
 //   :save_as_new - Save button acts as 'save as new' (default: false)
 //     Especially, 
-//     :hide - Show save button only after code is changed  
-//     :show - Show save button from first (defualt)
+//     :fork - Add parent information
 //   :delete_button - Show delete button (default: false)
 
 = form_for @code, html: {id: 'editor-form', class: 'form-stacked'} do |f|
@@ -19,8 +18,8 @@
         - @code.errors.full_messages.each do |msg|
           li= msg
 
+
   - if opts[:title]
-    // Title
     h2 
       = link_to @code.title, code_path(@code)
 
@@ -29,6 +28,23 @@
       ' by
       = render @code.user
 
+
+  // Parent
+  - if @code.parent
+    .clearfix
+      = label_tag :parent_id, 'Original'
+      .parent-code
+        = link_to @code.parent.title, code_path(@code.parent)
+        '  (by
+        = render @code.parent.user
+        ' )
+
+      = hidden_field_tag :parent_id, @code.parent.id
+
+  - elsif opts[:fork]
+    = hidden_field_tag :parent_id, @code.id
+
+  // code.title
   - if opts[:save_as_new]
     = f.hidden_field :title, id: 'code-title'
   - else
@@ -49,7 +65,8 @@
       = button_tag 'Run', type: 'button', id: 'run', class: 'btn'
     // Reset button
     .span1.offset5
-      = button_tag 'Reset', type: 'button', id: 'reset', class: 'btn disabled'
+      #reset-div.hide
+        = button_tag 'Reset', type: 'button', id: 'reset', class: 'btn'
 
   .board.clearfix
     .left
@@ -61,12 +78,8 @@
   // Button save
   .row
     .span1.offset6
-      - case opts[:save_as_new]
-      - when :show, true
+      - if opts[:save_as_new]
         #save-as-new
-          = submit_tag 'Save as new', id: 'save', class: 'btn primary large'
-      - when :hide
-        #save-as-new.hide
           = submit_tag 'Save as new', id: 'save', class: 'btn primary large'
       - else
         // Value must be 'Save' (see codes.js.coffee)
@@ -74,10 +87,9 @@
 
     - if opts[:delete_button]
       .span3.offset5
-        //= button_tag 'Delete this code', type: 'button', id: 'delete', class: 'btn small danger'
-        = link_to 'Delete this code', @code, confirm: 'Are you sure?', method: :delete, class: 'btn small danger'
-
-
+        = link_to 'Delete this code', @code,           \
+            confirm: 'Are you sure?', method: :delete, \
+            class: 'btn small danger'
 
 // Modal
 #modal-please-sign-in.modal.hide

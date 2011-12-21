@@ -3,13 +3,16 @@
   '  - BiwaScheme Blackboard
 
 - if @owned
+  // Edit code
   == render partial: 'form', locals: {opts: {title: true, \
                                              author: true, \
                                              save_as_new: false, \
                                              delete_button: true}}
 - else
+  // Fork code
   == render partial: 'form', locals: {opts: {title: true, \
                                              author: true, \
-                                             save_as_new: :show}}
+                                             save_as_new: :show, \
+                                             fork: true}}
 
 == render 'shared/social_buttons'

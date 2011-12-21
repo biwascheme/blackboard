@@ -45,9 +45,9 @@ $ ->
     clojureMode = require("ace/mode/clojure").Mode
     editor.getSession().setMode(new clojureMode())
     # OnChange
-    editor.getSession().on 'change', ->
-      $('#save-as-new').fadeIn()
-      editor.getSession().on('change', ->{})
+    #editor.getSession().on 'change', ->
+    #  $('#save-as-new').fadeIn()
+    #  editor.getSession().on('change', ->{})
 
   #
   # Event handlers
@@ -55,7 +55,7 @@ $ ->
 
   $('#run').click ->
     # Enable reset button
-    $('#reset').removeClass("disabled")
+    $('#reset-div').fadeIn()
     
     # Reset iframe content
     if emptyIframe

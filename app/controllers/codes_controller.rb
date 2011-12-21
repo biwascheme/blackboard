@@ -31,6 +31,9 @@ class CodesController < ApplicationController
     @code.title = Time.now.strftime("%Y-%m-%d")
     @code.body = params[:code].try(:[], :body) ||
                  '(print "Hello, world!")'
+    if (id = params[:parent_id])
+      @code.parent = Code.find(id)
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,6 +46,10 @@ class CodesController < ApplicationController
   def create
     @code = Code.new(params[:code])
     @code.user = current_user
+
+    if (id = params[:parent_id])
+      @code.parent = Code.find(id)
+    end
 
     respond_to do |format|
       if @code.save
