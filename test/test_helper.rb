@@ -16,3 +16,12 @@ end
 class ActionController::TestCase
   include Devise::TestHelpers
 end
+
+# capybara
+require 'capybara/rails'
+
+class ActionDispatch::IntegrationTest
+  include Capybara::DSL
+end
+Capybara.default_driver = :webkit
+
