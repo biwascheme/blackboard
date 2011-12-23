@@ -4,7 +4,7 @@ gem 'rails', '3.1.3'
 
 # Model
 
-gem 'sqlite3'
+group(:development, :test){ gem 'sqlite3' }
 group(:production){ gem 'pg' }
 gem 'ancestry'
 #gem 'acts-as-taggable-on'
